@@ -26,33 +26,35 @@ console.log("in index.js");
   camera.position.z = 800;
 
   
-  
+ let light = new THREE.HemisphereLight( 0xffffff, 0xffffff );
+            light.position.set( 1, 1, 1 );
+            scene.add( light );
 
 //  let hlight = new THREE.AmbientLight (0x404040,100);
 //   scene.add(hlight);
 
-  let directionalLight = new THREE.DirectionalLight();
-  directionalLight.position.set(0,0,0);
+  let directionalLight = new THREE.DirectionalLight(0xffffff);
+  directionalLight.position.set(1,1,1);
   directionalLight.castShadow = false;
   scene.add(directionalLight);
-  let light = new THREE.PointLight(0xffffff);
-  light.position.set(700,700,700);
-  scene.add(light);
-  let light2 = new THREE.PointLight();
-  light2.position.set(700,700,700);
-  scene.add(light2);
-  let light3 = new THREE.PointLight();
-  light3.position.set(700,700,-700);
-  scene.add(light3);
-  let light4 = new THREE.PointLight();
-  light4.position.set(-700,700,700);
-  scene.add(light4);
-  let light5 = new THREE.PointLight();
-  light5.position.set(-700,-700,700);
-  scene.add(light5);
-  let light6 = new THREE.PointLight();
-  light6.position.set(-700,-700,-700);
-  scene.add(light6);
+//   let light = new THREE.PointLight(0xffffff);
+//   light.position.set(700,700,700);
+//   scene.add(light);
+//   let light2 = new THREE.PointLight();
+//   light2.position.set(700,700,700);
+//   scene.add(light2);
+//   let light3 = new THREE.PointLight();
+//   light3.position.set(700,700,-700);
+//   scene.add(light3);
+//   let light4 = new THREE.PointLight();
+//   light4.position.set(-700,700,700);
+//   scene.add(light4);
+//   let light5 = new THREE.PointLight();
+//   light5.position.set(-700,-700,700);
+//   scene.add(light5);
+//   let light6 = new THREE.PointLight();
+//   light6.position.set(-700,-700,-700);
+//   scene.add(light6);
 
   renderer = new THREE.WebGLRenderer({alpha:true});
   let controls = new OrbitControls(camera,renderer.domElement);
