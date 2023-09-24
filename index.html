@@ -63,6 +63,7 @@ console.log("in index.js");
   navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then((stream)=>{
     video.srcObject=stream;
     console.log(stream);
+    video.playsInline=true; 
     video.play();
   });
   video.style.position="absolute";
