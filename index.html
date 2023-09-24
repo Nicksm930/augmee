@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.114/build/three.module.js';
+        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/controls/OrbitControls.js';
+        import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/GLTFLoader.js';
+
+        
+      let scene, camera, renderer;
+
+console.log("in index.js");
+
+  scene = new THREE.Scene();
+// scene.background = new THREE.Color(0xdddddd);
+
+  camera = new THREE.PerspectiveCamera(40,window.innerWidth/window.innerHeight,1,5000);
+  camera.rotation.y = 45/180*Math.PI;
+  camera.position.x = 800;
+  camera.position.y = 100;
+  camera.position.z = 1000;
+
+  
+  
+
+//  let hlight = new THREE.AmbientLight (0x404040,100);
+//   scene.add(hlight);
+
+  let directionalLight = new THREE.DirectionalLight();
+  directionalLight.position.set(0,0,0);
+  directionalLight.castShadow = false;
+  scene.add(directionalLight);
+  let light = new THREE.PointLight(0xffffff);
+  light.position.set(700,700,700);
+  scene.add(light);
+  let light2 = new THREE.PointLight();
+  light2.position.set(700,700,700);
+  scene.add(light2);
+  let light3 = new THREE.PointLight();
+  light3.position.set(700,700,-700);
+  scene.add(light3);
+  let light4 = new THREE.PointLight();
+  light4.position.set(-700,700,700);
+  scene.add(light4);
+  let light5 = new THREE.PointLight();
+  light5.position.set(-700,-700,700);
+  scene.add(light5);
+  let light6 = new THREE.PointLight();
+  light6.position.set(-700,-700,-700);
+  scene.add(light6);
+
+  renderer = new THREE.WebGLRenderer({alpha:true});
+  let controls = new OrbitControls(camera,renderer.domElement);
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  const video=document.createElement("video");
+  navigator.mediaDevices.getUserMedia({video:true}).then((stream)=>{
+    video.srcObject=stream;
+    console.log(stream);
+    video.play();
+  });
+  video.style.position="absolute";
+  video.style.width="100%";
+  video.style.height=renderer.domElement.height;
+  renderer.domElement.style.position="absolute";
+  document.body.appendChild(video);
+  document.body.appendChild(renderer.domElement);
+//   controls.addEventListener('change', renderer);
+
+  let loader = new GLTFLoader();
+  loader.load('./fast-food/scene.gltf', function(gltf){
+    let car = gltf.scene.children[0];
+    car.scale.set(0.5,0.5,0.5);
+    scene.add(gltf.scene);
+    animate();
+  });
+
+function animate() {
+  renderer.render(scene,camera);
+  requestAnimationFrame(animate);
+}
+
+
+
+   </script>
+    <!-- <script src="./index.js" type="module"></script> -->
+</body>
+</html>
