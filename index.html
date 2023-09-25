@@ -4,8 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+      #videoElement {
+        max-width: 100%;
+    border: 2px solid #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(0deg);
+    background-color: black;
+    opacity: 1;
+    top: 0;
+}
+    </style>
 </head>
 <body>
+  
+    
+    
+      <video id="videoElement" autoplay playsinline></video>
+    
+ 
+  
    <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.114/build/three.module.js';
         import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/controls/OrbitControls.js';
@@ -59,18 +80,18 @@ console.log("in index.js");
   renderer = new THREE.WebGLRenderer({alpha:true});
   let controls = new OrbitControls(camera,renderer.domElement);
   renderer.setSize(window.innerWidth,window.innerHeight);
-  const video=document.createElement("video");
+  const video=document.getElementById('videoElement');
   navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then((stream)=>{
     video.srcObject=stream;
     console.log(stream);
     video.playsInline=true; 
     video.play();
   });
-  video.style.position="absolute";
-  video.style.width="100%";
-  video.style.height="100%";
+  // video.style.position="absolute";
+  // video.style.width="100%";
+  // video.style.height="100%";
   renderer.domElement.style.position="absolute";
-  document.body.appendChild(video);
+  document.body.append(video);
   document.body.appendChild(renderer.domElement);
 //   controls.addEventListener('change', renderer);
 
@@ -84,15 +105,15 @@ console.log("in index.js");
   });
 
 const animate=()=> {
-  // Update your camera and other components as needed
+  // // Update your camera and other components as needed
   
-  // Calculate the direction from the object to the camera
-  const direction = new THREE.Vector3();
-  camera.getWorldPosition(direction);
-  direction.sub(car.position);
+  // // Calculate the direction from the object to the camera
+  // const direction = new THREE.Vector3();
+  // camera.getWorldPosition(direction);
+  // direction.sub(car.position);
   
-  // Set the rotation of the object to face the camera
-  car.lookAt(direction);
+  // // Set the rotation of the object to face the camera
+  // car.lookAt(direction);
   
   // Render your scene
   renderer.render(scene, camera);
