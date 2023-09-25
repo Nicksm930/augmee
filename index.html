@@ -23,7 +23,10 @@
   
     
     
-      <video id="videoElement" autoplay playsinline></video>
+      <video id="videoElement" autoplay playsinline>
+        <!-- <canvas id="can1"></canvas> -->
+      </video>
+      
     
  
   
@@ -87,7 +90,18 @@ console.log("in index.js");
     video.playsInline=true; 
     video.play();
   });
-  video.style.position="absolute";
+  
+  if (window.matchMedia("(orientation: portrait)").matches) {
+   // you're in PORTRAIT mode
+   video.style.position="absolute";
+   console.log("PORTRAIT");
+}
+
+if (window.matchMedia("(orientation: landscape)").matches) {
+   // you're in LANDSCAPE mode
+   console.log("LANDSCAPE");
+}
+  
   // video.style.width="100%";
   // video.style.height="100%";
   renderer.domElement.style.position="absolute";
@@ -101,9 +115,9 @@ console.log("in index.js");
     car = gltf.scene.children[0];
     car.scale.set(1.5,1.5,1.5);
     scene.add(gltf.scene);
-    animate();
+    
   });
-
+  
 const animate=()=> {
   // // Update your camera and other components as needed
   
@@ -114,15 +128,17 @@ const animate=()=> {
   
   // // Set the rotation of the object to face the camera
   // car.lookAt(direction);
-  
+  requestAnimationFrame(animate);
   // Render your scene
+  // car.rotation.x += 0.01;
+      car.rotation.z += 0.01;
   renderer.render(scene, camera);
   
   // Call the update function recursively for smooth animation
-  requestAnimationFrame(animate);
+  
 }
 
-
+animate();
 
    </script>
     <!-- <script src="./index.js" type="module"></script> -->
