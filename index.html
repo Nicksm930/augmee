@@ -68,22 +68,36 @@ console.log("in index.js");
   });
   video.style.position="absolute";
   video.style.width="100%";
-  video.style.height=renderer.domElement.height;
+  video.style.height="100%";
   renderer.domElement.style.position="absolute";
   document.body.appendChild(video);
   document.body.appendChild(renderer.domElement);
 //   controls.addEventListener('change', renderer);
 
   let loader = new GLTFLoader();
+  let car;
   loader.load('./fast-food/scene.gltf', function(gltf){
-    let car = gltf.scene.children[0];
+    car = gltf.scene.children[0];
     car.scale.set(1.5,1.5,1.5);
     scene.add(gltf.scene);
     animate();
   });
 
-function animate() {
-  renderer.render(scene,camera);
+const animate=()=> {
+  // Update your camera and other components as needed
+  
+  // Calculate the direction from the object to the camera
+  const direction = new THREE.Vector3();
+  camera.getWorldPosition(direction);
+  direction.sub(car.position);
+  
+  // Set the rotation of the object to face the camera
+  car.lookAt(direction);
+  
+  // Render your scene
+  renderer.render(scene, camera);
+  
+  // Call the update function recursively for smooth animation
   requestAnimationFrame(animate);
 }
 
