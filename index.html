@@ -1,146 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-      #videoElement {
-        max-width: 100%;
-    border: 2px solid #333;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform: rotate(0deg);
-    background-color: black;
-    opacity: 1;
-    top: 0;
-}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" type="module"></script>
+
 </head>
+
 <body>
+
+
+
+  <video id="videoElement" autoplay playsinline>
+    <!-- <canvas id="can1"></canvas> -->
+  </video>
+<div class="menu">
   
-    
-    
-      <video id="videoElement" autoplay playsinline>
-        <!-- <canvas id="can1"></canvas> -->
-      </video>
-      
-    
- 
-  
-   <script type="module">
-        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.114/build/three.module.js';
-        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/controls/OrbitControls.js';
-        import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/GLTFLoader.js';
+</div>
+  <div class="menulist">
+    <ul>
+      <li onclick="test()">one</li>
+      <li onclick="changefile('./fast-food3/scene.gltf')">two</li>
+      <li onclick="changefile('./fast-food/scene.gltf')">three</li>
+      <li onclick="changefile('./fast-food2/scene.gltf')">one</li>
+      <li onclick="changefile('./fast-food3/scene.gltf')">two</li>
+      <li onclick="changefile('./classic_ramen/scene.gltf')">three</li>
+    </ul>
+  </div>
 
-        
-      let scene, camera, renderer;
-
-console.log("in index.js");
-
-  scene = new THREE.Scene();
-// scene.background = new THREE.Color(0xdddddd);
-
-  camera = new THREE.PerspectiveCamera(30,window.innerWidth/window.innerHeight,1,5000);
-  camera.rotation.y = 45/180*Math.PI;
-  camera.position.x = 2000;
-  camera.position.y = 1000;
-  camera.position.z = 800;
-
-  
- let light = new THREE.HemisphereLight( 0xffffff, 0xffffff );
-            light.position.set( 1, 1, 1 );
-            scene.add( light );
-
-//  let hlight = new THREE.AmbientLight (0x404040,100);
-//   scene.add(hlight);
-
-  let directionalLight = new THREE.DirectionalLight(0xffffff);
-  directionalLight.position.set(1,1,1);
-  directionalLight.castShadow = false;
-  scene.add(directionalLight);
-//   let light = new THREE.PointLight(0xffffff);
-//   light.position.set(700,700,700);
-//   scene.add(light);
-//   let light2 = new THREE.PointLight();
-//   light2.position.set(700,700,700);
-//   scene.add(light2);
-//   let light3 = new THREE.PointLight();
-//   light3.position.set(700,700,-700);
-//   scene.add(light3);
-//   let light4 = new THREE.PointLight();
-//   light4.position.set(-700,700,700);
-//   scene.add(light4);
-//   let light5 = new THREE.PointLight();
-//   light5.position.set(-700,-700,700);
-//   scene.add(light5);
-//   let light6 = new THREE.PointLight();
-//   light6.position.set(-700,-700,-700);
-//   scene.add(light6);
-
-  renderer = new THREE.WebGLRenderer({alpha:true});
-  let controls = new OrbitControls(camera,renderer.domElement);
-  renderer.setSize(window.innerWidth,window.innerHeight);
-  const video=document.getElementById('videoElement');
-  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then((stream)=>{
-    video.srcObject=stream;
-    console.log(stream);
-    video.playsInline=true; 
-    video.play();
-  });
-  
-  if (window.matchMedia("(orientation: portrait)").matches) {
-   // you're in PORTRAIT mode
-   video.style.position="absolute";
-   console.log("PORTRAIT");
-}
-
-if (window.matchMedia("(orientation: landscape)").matches) {
-   // you're in LANDSCAPE mode
-   console.log("LANDSCAPE");
-}
-  
-  // video.style.width="100%";
-  // video.style.height="100%";
-  renderer.domElement.style.position="absolute";
-  document.body.append(video);
-  document.body.appendChild(renderer.domElement);
-//   controls.addEventListener('change', renderer);
-
-  let loader = new GLTFLoader();
-  let car;
-  loader.load('./fast-food/scene.gltf', function(gltf){
-    car = gltf.scene.children[0];
-    car.scale.set(1.5,1.5,1.5);
-    scene.add(gltf.scene);
-    
-  });
-  
-const animate=()=> {
-  // // Update your camera and other components as needed
-  
-  // // Calculate the direction from the object to the camera
-  // const direction = new THREE.Vector3();
-  // camera.getWorldPosition(direction);
-  // direction.sub(car.position);
-  
-  // // Set the rotation of the object to face the camera
-  // car.lookAt(direction);
-  requestAnimationFrame(animate);
-  // Render your scene
-  // car.rotation.x += 0.01;
-      car.rotation.z += 0.01;
-  renderer.render(scene, camera);
-  
-  // Call the update function recursively for smooth animation
-  
-}
-
-animate();
-
-   </script>
-    <!-- <script src="./index.js" type="module"></script> -->
+  <!-- <script src="./script.js" type="module"></script> -->
 </body>
+
 </html>
