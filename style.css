@@ -1,10 +1,13 @@
+body{
+    background-color: black !important;
+}
 #videoElement {
     /* max-width: 100%; */
-    border: 2px solid #333;
+    /* border: 2px solid #333; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     /* position: absolute; */
     width: 100vw;
-    height: 100vh;
+    height: 70vh;
     /* transform: rotate(0deg); */
     background-color: black;
     opacity: 1;
@@ -13,10 +16,13 @@
 }
 
 canvas {
-    width: 110vw !important;
-    height: 100vh !important;
+    width: 100vw !important;
+    height: 70vh !important;
     position: absolute;
     top: 0 !important;
+}
+.selected-food{
+    filter: grayscale(0);
 }
 
 body{
@@ -39,38 +45,56 @@ body{
 
 .menulist {
     position: absolute;
-    top: 0;
-    width: 30vw;
+    bottom: 0;
+    width: 100vw;
     left: 0;
     background: transparent;
     color: white;
     z-index: 3;
-    overflow: scroll;
-    height: 80vh;
-    top: 10vh;
+    /* overflow: scroll; */
+    height: 20vh;
     /* filter: grayscale(1); */
+    display: flex;
 }
 
 .menu {
     position: absolute;
-    top: 0;
-    width: 30vw;
+    bottom: 0;
+    width: 100vw;
     left: 0;
-    background: url(./menub.jpg);
+    background: #307b77;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     z-index: 2;
-    height: 100vh;
+    height: 23vh;
     opacity: 0.6;
 }
-ul li {
-    padding: 20px;
-    /* background-color: antiquewhite; */
-    font-size: 30px;
+.menu-item{
+    height: 20vh;
+    width: 24vw;
     text-align: center;
-    list-style-type: none;
+    font-size: 8vw;
+    padding: 0vw;
+    position: relative;
+    top: 11vw;
 }
-
-ul {
-    padding: 0;
+.c-item{
+    width: 100vw !important;
+    display: grid !important;
+    grid-template-columns: 25% 25% 25%;
+    column-gap: 1.5%;
+    justify-content: center;
+}
+.c-img{
+    
+height: 16vh;
+    
+filter: grayscale(1);
+}
+.carousel {
+    position: relative;
+    height: 16vh;
+}
+.selected-food{
+    filter: grayscale(0);
 }
